@@ -145,7 +145,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <Image
-                  src="/images/icons/Linkedin.svg"
+                  src="/images/icons/LinkedIn.svg"
                   alt="LinkedIn"
                   width={24}
                   height={24}
