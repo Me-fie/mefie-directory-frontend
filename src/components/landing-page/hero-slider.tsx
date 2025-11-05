@@ -17,9 +17,14 @@ export default function HeroSlider() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleClick = () => {
-    const currentSlideData = heroSlides[currentSlide];
-    if (currentSlideData.link) router.push(currentSlideData.link);
+  const handleClickListing = () => {
+    // const currentSlideData = heroSlides[currentSlide];
+    router.push("/discover");
+  };
+
+  const handleClickEvent = () => {
+    // const currentSlideData = heroSlides[currentSlide];
+    router.push("/");
   };
 
   // Define unique colors for each slide dot
@@ -55,14 +60,14 @@ export default function HeroSlider() {
           {/* Buttons */}
           <div className="flex space-x-2 sm:space-x-4 mt-4 px-4">
             <Button
-              onClick={handleClick}
+              onClick={handleClickEvent}
               className="py-3 sm:py-5 px-3 sm:px-4 bg-(--accent-primary) text-xs sm:text-base font-normal rounded-[8px] text-white hover:bg-[#FCFFDF] hover:text-black transition-all duration-300 cursor-pointer"
             >
               {heroSlides[currentSlide].cta}
             </Button>
 
             <Button
-              onClick={handleClick}
+              onClick={handleClickListing}
               className="py-3 sm:py-5 px-3 sm:px-4 bg-(--accent-tertiary) text-xs sm:text-base font-normal rounded-[8px] text-[#0F1621] hover:bg-gray-300 transition-all duration-300 cursor-pointer"
             >
               {heroSlides[currentSlide].cta2}
