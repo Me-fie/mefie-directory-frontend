@@ -378,6 +378,58 @@ export const communities: Community[] = [
   },
 ];
 
+// community card data
+export type CommunityCard = {
+  id: string; // Always good to have an id
+  name: string; // From your boilerplate
+  imageUrl: string; // Inferred from image
+  tag: string; // Inferred from image ("Community Support")
+  verified: boolean;
+  type: "community";
+};
+export const communityCards: CommunityCard[] = [
+  {
+    id: "1",
+    name: "Faith & Values",
+    imageUrl: "/images/faith.jpg",
+    tag: "Community Support",
+    verified: true,
+    type: "community",
+  },
+  {
+    id: "2",
+    name: "Creators & Entrepreneurs",
+    imageUrl: "/images/creators.jpg",
+    tag: "Community Support",
+    verified: true,
+    type: "community",
+  },
+  {
+    id: "3",
+    name: "Mothers Connect",
+    imageUrl: "/images/backgroundImages/community/community-people.png", // The image from the screenshot
+    tag: "Community Support",
+    verified: true,
+    type: "community",
+  },
+  {
+    id: "4",
+    name: "Neighborhood Gardeners",
+    imageUrl: "/images/backgroundImages/community/togetherness.jpg", // Example
+    tag: "Local Groups",
+    verified: false,
+    type: "community",
+  },
+  {
+    id: "5",
+    name: "Startup Founders Hub",
+    imageUrl: "/images/backgroundImages/community/community-love.jpg", // Example
+    tag: "Professional",
+    verified: true,
+    type: "community",
+  },
+];
+
 
 // faqs
 export type Faq = {

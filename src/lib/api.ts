@@ -40,6 +40,9 @@ export interface Community extends Listing {
   type: "community";
   memberCount?: number;
   category: string;
+  imageUrl: string;
+  tag: string;
+  verified: boolean;
 }
 
 export interface ApiResponse<T> {

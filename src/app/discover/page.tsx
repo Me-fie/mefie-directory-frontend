@@ -4,12 +4,13 @@ import SearchHeader from "@/components/search-header";
 import BusinessCardCarousel from "@/components/discover/business-card-carousel";
 import EventCardCarousel from "@/components/discover/event-card-carousel";
 import BusinessBestCarousel from "@/components/discover/business-best-carousel";
-import { featuredBusinesses, Events } from "@/lib/data";
+import { featuredBusinesses, Events, communityCards } from "@/lib/data";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import BusinessSectionCarousel from "@/components/business-section-carousel";
 import EventSectionCarousel from "@/components/event-section-carousel";
+import CommunitySectionCarousel from "@/components/community-section-carousel";
 
 export default async function Discover() {
   const businesses = featuredBusinesses;
@@ -131,7 +132,7 @@ export default async function Discover() {
         </div>
 
         {/* Communities section */}
-        {/* <div className="py-12 px-4 lg:px-16">
+        <div className="py-10 px-4 lg:px-16">
           <div className="flex flex-row justify-between items-end md:items-center gap-3 mb-8">
             <div className="flex flex-col space-y-2">
               <h2 className="font-semibold text-xl md:text-4xl">Communities</h2>
@@ -153,8 +154,8 @@ export default async function Discover() {
           </div>
 
     
-          <EventSectionCarousel events={events} />
-        </div> */}
+          <CommunitySectionCarousel communities={communityCards} />
+        </div>
 
         {/* CTA */}
         <div className="py-12 px-4 lg:px-16">
