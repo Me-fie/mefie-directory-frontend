@@ -47,7 +47,7 @@ export default function Home() {
       <HeroSlider />
 
       {/* Explore by Category */}
-      <div className="py-16 px-4 lg:px-16 mt-6">
+      <div className="py-16 px-4 lg:px-16">
         <div className="flex flex-row justify-between items-center md:items-center gap-3 mb-8">
           <div className="flex flex-col space-y-2">
             <h2 className="font-semibold text-xl md:text-4xl">
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
 
         {/* Category Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {sortedCategories.map((category) => (
             <Link
               key={category.id}
@@ -89,7 +89,7 @@ export default function Home() {
       </div>
 
       {/* Featured Businesses */}
-      <div className="py-16 px-4 lg:py-20 lg:px-16 mt-6">
+      <div className="py-16 px-4 lg:py-20 lg:px-16">
         <div className="flex flex-row justify-between items-end md:items-center gap-3 mb-8">
           <div className="flex flex-col space-y-2">
             <h2 className="font-semibold text-xl md:text-4xl">
@@ -120,7 +120,7 @@ export default function Home() {
       </div>
 
       {/* Upcoming Events */}
-      <div className="py-16 px-4 lg:py-20 lg:px-16 mt-6">
+      <div className="py-16 px-4 lg:py-20 lg:px-16">
         <div className="flex flex-row justify-between items-end md:items-center gap-3 mb-8">
           <div className="flex flex-col space-y-2">
             <h2 className="font-semibold text-xl md:text-4xl">
@@ -151,7 +151,7 @@ export default function Home() {
       </div>
 
       {/* Ready to grow your business section */}
-      <div className="py-16 px-4 lg:px-16 mt-6">
+      <div className="py-16 px-4 lg:px-16">
         <div className="flex flex-col lg:flex-row overflow-hidden rounded-2xl bg-white shadow-sm">
           {/* Left: Image */}
           <div className="relative w-full lg:w-1/2 h-[320px] lg:h-auto">
@@ -183,7 +183,7 @@ export default function Home() {
       </div>
 
       {/* Community you can explore section */}
-      <div className="py-16 px-4 lg:px-16 mt-6">
+      <div className="py-16 px-4 lg:px-16">
         <div className="flex flex-row justify-between items-center md:items-center gap-3 mb-10">
           <div className="flex flex-col space-y-2">
             <h2 className="font-semibold text-xl md:text-4xl">
@@ -239,7 +239,7 @@ export default function Home() {
       </div>
 
       {/* FAQs */}
-      <div className="py-16 px-4 lg:px-16 mt-6">
+      <div className="py-16 px-4 lg:px-16">
         <div className="flex flex-row justify-center items-center md:items-center gap-3 mb-8">
           <div className="flex flex-col space-y-2 text-center">
             <h2 className="font-semibold text-xl md:text-4xl capitalize">
@@ -270,6 +270,7 @@ export default function Home() {
               alt="background pattern left"
               width={320}
               height={320}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-contain h-[150px] lg:h-[400px]"
               priority
             />
@@ -280,6 +281,7 @@ export default function Home() {
               alt="background pattern right"
               width={320}
               height={320}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-contain"
               priority
             />
@@ -290,6 +292,7 @@ export default function Home() {
               alt="background pattern right"
               width={320}
               height={320}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-contain h-[120px]"
               priority
             />
