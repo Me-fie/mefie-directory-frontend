@@ -3,19 +3,23 @@ import { useCallback, useEffect, useState } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import type { Event } from "@/lib/data";
-import { EventCard } from "./event-card";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
+import { EventCardScroll } from "./event-card-scroll";
 
 interface EventSectionCarouselProps {
   events: Event[];
   title?: string;
   showNavigation?: boolean;
+  onViewDetails?: (eventId: string) => void;
+  onGetTickets?: (eventId: string) => void;
 }
 
-export default function EventSectionCarousel({
+export default function EventCarousel({
   events,
-  title,
+  title = "Events",
   showNavigation = true,
+  onViewDetails,
+  onGetTickets,
 }: EventSectionCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "center",
@@ -56,14 +60,14 @@ export default function EventSectionCarousel({
   }, [emblaApi]);
 
   return (
-    <div>
+    <div className="py-12 px-4 lg:px-16">
       {/* Header with Title and Navigation Buttons */}
       <div className="mb-8 flex items-center justify-between">
         <h2 className="font-semibold text-2xl md:text-3xl">{title}</h2>
 
         {/* Navigation Buttons */}
         {showNavigation && (
-          <div className="flex gap-2">
+          <div className="hidden md:flex gap-2">
             <Button
               variant="outline"
               size="icon"
@@ -89,12 +93,16 @@ export default function EventSectionCarousel({
       {/* Carousel Container */}
       <div className="overflow-hidden pb-2" ref={emblaRef}>
         <div className="flex gap-6">
-          {events.map((event) => (
+          {events.map((eventItem) => (
             <div
-              key={event.id}
-              className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_calc(50%-0.5rem)] lg:flex-[0_0_calc(33%-0.70rem)]"
+              key={eventItem.id}
+              className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_calc(50%-0.75rem)] lg:flex-[0_0_calc(50%-0.75rem)]"
             >
-              <EventCard event={event} />
+              <EventCardScroll
+                event={eventItem}
+                onViewDetails={onViewDetails}
+                onGetTickets={onGetTickets}
+              />
             </div>
           ))}
         </div>

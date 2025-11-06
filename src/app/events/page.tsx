@@ -1,6 +1,8 @@
 import NavigationTab from "@/components/navigation-tab";
+import EventsContent from "./events-content";
+import { events as eventsCategories, Events } from "@/lib/data";
 
-export default async function Events(){
+export default async function EventsPage(){
     return (
          <div className="overflow-x-hidden pt-20 bg-gray-50">
               <div className="w-full">
@@ -8,7 +10,7 @@ export default async function Events(){
                 <NavigationTab />
                 
                 {/* Category Tabs & Content */}
-                {/* <BusinessesContent categories={categories} businesses={businesses} /> */}
+                <EventsContent categories={eventsCategories} events={Events} />
               </div>
             </div>
     )

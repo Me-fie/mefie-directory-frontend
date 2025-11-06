@@ -3,7 +3,7 @@ import { useState, useMemo } from "react";
 import HeroSlider from "@/components/landing-page/hero-slider";
 import { Sort, SortOption } from "@/components/sort";
 import { BusinessCarousel } from "@/components/landing-page/business-carousel";
-import { EventCarousel } from "@/components/landing-page/event-carousel";
+import { DirectoryEventCarousel } from "@/components/landing-page/directory-event-carousel";
 import Image from "next/image";
 import Link from "next/link";
 import { categories, communities } from "@/lib/data";
@@ -152,7 +152,7 @@ export default function HomeContent({
         </div>
 
         {/* Events Carousel */}
-        <EventCarousel events={upcomingEvents} />
+        <DirectoryEventCarousel events={upcomingEvents} />
       </div>
 
       {/* Ready to grow your business section */}

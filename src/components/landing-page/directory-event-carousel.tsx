@@ -9,7 +9,7 @@ type EventCarouselProps = {
   events: Event[];
 };
 
-export function EventCarousel({ events }: EventCarouselProps) {
+export function DirectoryEventCarousel({ events }: EventCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "center",
     loop: false,
