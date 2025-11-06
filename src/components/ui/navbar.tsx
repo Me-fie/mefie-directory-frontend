@@ -117,13 +117,13 @@ export default function Navbar() {
             </Link>
             <Link
               href="/register"
-              className="px-4 py-2 text-base font-normal text-gray-900 bg-white hover:bg-white/20 hover:text-gray-100 rounded-[8px] transition-colors"
+              className="px-4 py-2 text-base font-normal text-gray-900 bg-white hover:bg-white/20 hover:text-gray-100 rounded-xl transition-colors"
             >
               Sign Up
             </Link>
             <Link
               href="/become-vendor"
-              className="px-4 py-2 text-base font-normal text-white bg-(--accent-primary) hover:bg-[#98BC3B] rounded-[8px] transition-colors"
+              className="px-4 py-2 text-base font-normal text-white bg-(--accent-primary) hover:bg-[#98BC3B] rounded-xl transition-colors"
             >
               Become a vendor
             </Link>
@@ -207,7 +207,7 @@ export default function Navbar() {
             <Link
               href="/become-vendor"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full text-center px-4 py-3 text-base font-normal text-white bg-(--accent-primary) hover:bg-[#98BC3B] rounded-[8px] transition-colors mt-20"
+              className="block w-full text-center px-4 py-3 text-base font-normal text-white bg-(--accent-primary) hover:bg-[#98BC3B] rounded-xl transition-colors mt-20"
             >
               Become a vendor
             </Link>

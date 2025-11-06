@@ -21,6 +21,7 @@ export interface Business extends Listing {
   reviewCount: string;
   location: string;
   slug: string;
+  category: string;
   verified?: boolean;
   discount?: string;
 }
@@ -159,6 +160,30 @@ export async function fetchCommunities(
 
   if (!response.ok) {
     throw new Error("Failed to fetch communities");
+  }
+
+  return response.json();
+}
+
+/**
+ * Business Category type for filtering
+ */
+export interface BusinessCategory {
+  label: string;
+  value: string;
+}
+
+/**
+ * Fetch business categories from the API
+ */
+export async function fetchBusinessCategories(): Promise<BusinessCategory[]> {
+  const response = await fetch("/api/categories/businesses", {
+    cache: "force-cache", // Categories are relatively static
+    next: { revalidate: 3600 }, // Revalidate every hour
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch business categories");
   }
 
   return response.json();

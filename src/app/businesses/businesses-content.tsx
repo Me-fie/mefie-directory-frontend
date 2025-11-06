@@ -1,0 +1,302 @@
+"use client";
+
+import { useState, useMemo, Suspense } from "react";
+import ScrollableCategoryTabs from "@/components/scrollable-category-tabs";
+import SearchHeader from "@/components/search-header";
+import { Business, BusinessCategory, Events } from "@/lib/data";
+import BusinessSection from "@/components/business/business-section";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
+import EventSectionCarousel from "@/components/event-section-carousel";
+
+interface BusinessesContentProps {
+  categories: BusinessCategory[];
+  businesses: Business[];
+}
+
+export default function BusinessesContent({
+  categories,
+  businesses,
+}: BusinessesContentProps) {
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [showAllCategories, setShowAllCategories] = useState(false);
+
+  const events = Events;
+
+  // Filter businesses based on selected category
+  const filteredBusinesses = useMemo(() => {
+    if (selectedCategory === "all") {
+      return businesses;
+    }
+
+    return businesses.filter((business) => {
+      // Normalize both values for flexible matching
+      const normalizeString = (str: string) =>
+        str
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(/&/g, "")
+          .replace(/'/g, "");
+
+      const businessCategory = normalizeString(business.category);
+      const selectedCat = normalizeString(selectedCategory);
+
+      // Flexible matching: exact match or partial match
+      return (
+        businessCategory === selectedCat ||
+        businessCategory.includes(selectedCat) ||
+        selectedCat.includes(businessCategory)
+      );
+    });
+  }, [businesses, selectedCategory]);
+
+  // Get businesses by specific category
+  const getBusinessesByCategory = (category: string) => {
+    return filteredBusinesses.filter((b) => b.category === category);
+  };
+
+  // Main categories to show initially (in order)
+  const mainCategories = ["Clothing", "Jewellery", "Art & Crafts"];
+
+  // Additional categories to show after "Explore more"
+  const additionalCategories = [
+    "Caterer",
+    "Dancers",
+    "Cultural Attire Stylist",
+    "Drummers & Cultural Performers",
+    "Toys & Games",
+    "Books & Magazines",
+  ];
+
+  return (
+    <>
+      {/* Scrollable Category Tabs */}
+      <div>
+        <ScrollableCategoryTabs
+          categories={categories}
+          defaultValue="all"
+          onChange={(value) => {
+            setSelectedCategory(value);
+            setShowAllCategories(false); // Reset expand state when category changes
+          }}
+          containerClassName="pt-4 pb-1"
+        />
+      </div>
+
+      {/* Search and Filter Bar */}
+      <div>
+        <Suspense fallback={<div className="h-20" />}>
+          <SearchHeader context="businesses" />
+        </Suspense>
+      </div>
+
+      {/* Business Content */}
+      <div className="bg-gray-50">
+        {filteredBusinesses.length > 0 ? (
+          <>
+            {selectedCategory === "all" ? (
+              // Show structured sections for "All" view
+              <>
+                {/* Top Best Deals Section */}
+                <BusinessSection
+                  businesses={filteredBusinesses.slice(0, 8)}
+                  title="Today's best deals just for you!"
+                  showNavigation={true}
+                />
+
+                {/* Main Category Sections */}
+                {mainCategories.map((category) => {
+                  const categoryBusinesses = getBusinessesByCategory(category);
+                  if (categoryBusinesses.length === 0) return null;
+
+                  return (
+                    <BusinessSection
+                      key={category}
+                      businesses={categoryBusinesses}
+                      title={category}
+                      showNavigation={true}
+                    />
+                  );
+                })}
+
+                {/* Explore More Button */}
+                {/* {!showAllCategories && (
+                  <div className="flex justify-center py-10">
+                    <Button
+                      onClick={() => setShowAllCategories(true)}
+                      className="px-4 py-3 border-2 bg-transparent border-[#9ACC23] text-[#9ACC23] rounded-md font-medium hover:bg-[#9ACC23] hover:text-white transition-colors"
+                    >
+                      Explore more businesses
+                    </Button>
+                  </div>
+                )} */}
+
+                {/* Additional Categories (shown after expand) */}
+                {showAllCategories && (
+                  <>
+                    {additionalCategories.map((category) => {
+                      const categoryBusinesses =
+                        getBusinessesByCategory(category);
+                      if (categoryBusinesses.length === 0) return null;
+
+                      return (
+                        <BusinessSection
+                          key={category}
+                          businesses={categoryBusinesses}
+                          title={category}
+                          showNavigation={true}
+                        />
+                      );
+                    })}
+                  </>
+                )}
+                {/* Explore more or less button */}
+                <div className="flex justify-center py-10">
+                  <Button
+                    onClick={() => setShowAllCategories(!showAllCategories)}
+                    className="px-4 py-3 border-2 bg-transparent border-[#9ACC23] text-[#9ACC23] rounded-md font-medium hover:bg-[#9ACC23] hover:text-white transition-colors"
+                  >
+                    {showAllCategories
+                      ? "Show less"
+                      : "Explore more businesses"}
+                  </Button>
+                </div>
+
+                {/* Ready to grow your business section */}
+                <div className="py-12 px-4 lg:px-16 bg-white">
+                  <div className="flex flex-col lg:flex-row overflow-hidden rounded-2xl bg-white shadow-sm">
+                    {/* Left: Image */}
+                    <div className="relative w-full lg:w-1/2 h-[320px] lg:h-auto">
+                      <Image
+                        src="/images/backgroundImages/business/vendor.jpg"
+                        alt="Vendor serving customer"
+                        fill
+                        className="object-cover"
+                        priority
+                      />
+                    </div>
+
+                    {/* Right: Text Content */}
+                    <div className="flex flex-col justify-center bg-[#0D7077] text-white w-full lg:w-1/2 p-8 lg:p-16 space-y-6">
+                      <h2 className="text-3xl md:text-5xl font-medium leading-tight">
+                        Grow Your Business with Mefie
+                      </h2>
+                      <p className="text-base md:text-lg leading-relaxed">
+                        Join a network of vendors and service providers reaching
+                        new audiences through Mefie. Showcase your products,
+                        connect with customers, and expand your business in a
+                        thriving digital marketplace.
+                      </p>
+                      <Button className="bg-(--accent-primary) hover:bg-[#93C956] text-white font-medium w-fit px-4 py-3 rounded-md cursor-pointer">
+                        Join as a vendor
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Events section*/}
+                <div className="py-12 px-4 lg:px-16">
+                  <div className="flex flex-row justify-between items-end md:items-center gap-3 mb-8">
+                    <div className="flex flex-col space-y-2">
+                      <h2 className="font-semibold text-xl md:text-4xl">
+                        Events
+                      </h2>
+                    </div>
+                    <div>
+                      <Link
+                        href="/events"
+                        className="text-[#275782] font-medium hidden lg:block"
+                      >
+                        Explore Events
+                      </Link>
+                      <Link
+                        href="/events"
+                        className="text-[#275782] font-medium lg:hidden"
+                      >
+                        Explore all
+                      </Link>
+                    </div>
+                  </div>
+                  <EventSectionCarousel events={events} />
+                </div>
+
+                {/* CTA */}
+                <div className="py-12 px-4 lg:px-16">
+                  <div className="relative flex flex-col justify-center items-center text-center bg-[#152B40] text-white rounded-3xl overflow-hidden h-[350px] shadow-sm px-20 lg:px-0">
+                    {/* Background patterns */}
+                    <div className="absolute -left-32 lg:-left-6 lg:-bottom-20">
+                      <Image
+                        src="/images/backgroundImages/bg-pattern.svg"
+                        alt="background pattern left"
+                        width={320}
+                        height={320}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-contain h-[150px] lg:h-[400px]"
+                        priority
+                      />
+                    </div>
+                    <div className="hidden lg:block absolute bottom-20 lg:-bottom-20 -right-24 lg:right-0">
+                      <Image
+                        src="/images/backgroundImages/bg-pattern-1.svg"
+                        alt="background pattern right"
+                        width={320}
+                        height={320}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-contain"
+                        priority
+                      />
+                    </div>
+                    <div className="block lg:hidden absolute bottom-16 -right-32">
+                      <Image
+                        src="/images/backgroundImages/mobile-pattern.svg"
+                        alt="background pattern right"
+                        width={320}
+                        height={320}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-contain h-[120px]"
+                        priority
+                      />
+                    </div>
+
+                    {/* Text content */}
+                    <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
+                      Ready to Grow Your Business?
+                    </h2>
+                    <p className="text-base md:text-lg font-normal text-gray-100 mb-6">
+                      Join thousands of African businesses already listed on
+                      Mefie Directory
+                    </p>
+
+                    {/* CTA button */}
+                    <Button className="bg-(--accent-primary) hover:bg-[#93C956] text-white font-medium text-base px-4 py-2 rounded-md transition-all duration-200">
+                      List your business today
+                    </Button>
+                  </div>
+                </div>
+              </>
+            ) : (
+              // Show filtered businesses in a single section
+              <>
+                <BusinessSection
+                  businesses={filteredBusinesses}
+                  title={
+                    categories.find((c) => c.value === selectedCategory)
+                      ?.label || "Filtered Businesses"
+                  }
+                  showNavigation={true}
+                />
+              </>
+            )}
+          </>
+        ) : (
+          <div className="py-16 px-4 lg:px-16 text-center">
+            <p className="text-gray-500 text-lg">
+              No businesses found in this category.
+            </p>
+          </div>
+        )}
+      </div>
+    </>
+  );
+}

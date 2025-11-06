@@ -6,15 +6,17 @@ import type { Business } from "@/lib/api";
 import { BusinessCard } from "../business-card";
 import { Button } from "../ui/button";
 
-interface BusinessBestCarouselProps {
+
+interface BusinessSectionCarouselProps {
   businesses: Business[];
   title?: string;
 }
 
-export default function BusinessBestCarousel({
+export default function ClothingSectionCarousel({
   businesses,
-  title = "Today’s best deals just for you!",
-}: BusinessBestCarouselProps) {
+  title = "Clothing",
+
+}: BusinessSectionCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "center",
     loop: false,
@@ -54,13 +56,13 @@ export default function BusinessBestCarousel({
   }, [emblaApi]);
 
   return (
-    <div className="py-8 px-4 lg:px-16">
+    <div>
       {/* Header with Title and Navigation Buttons */}
-      <div className="flex flex-row justify-between items-center mb-5">
+      <div className="mb-5 flex flex-row justify-between items-center">
         <h2 className="font-semibold text-2xl md:text-3xl">{title}</h2>
 
         {/* Navigation Buttons */}
-        <div className="hidden md:flex gap-2">
+        <div className="flex gap-2">
           <Button
             variant="outline"
             size="icon"
@@ -83,7 +85,7 @@ export default function BusinessBestCarousel({
       </div>
 
       {/* Carousel Container */}
-      <div className="overflow-hidden " ref={emblaRef}>
+      <div className="overflow-hidden pb-2" ref={emblaRef}>
         <div className="flex gap-4">
           {businesses.map((business) => (
             <div

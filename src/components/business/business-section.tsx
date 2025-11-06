@@ -6,17 +6,24 @@ import type { Business } from "@/lib/api";
 import { BusinessCard } from "../business-card";
 import { Button } from "../ui/button";
 
-interface BusinessBestCarouselProps {
+interface BusinessSectionProps {
   businesses: Business[];
-  title?: string;
+  title: string;
+  showNavigation?: boolean;
 }
 
-export default function BusinessBestCarousel({
+/**
+ * Reusable Business Section Component
+ * Displays a carousel of businesses with optional navigation buttons
+ * Automatically filters based on the businesses array passed to it
+ */
+export default function BusinessSection({
   businesses,
-  title = "Today’s best deals just for you!",
-}: BusinessBestCarouselProps) {
+  title,
+  showNavigation = true,
+}: BusinessSectionProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "center",
+    align: "start",
     loop: false,
     skipSnaps: true,
     dragFree: true,
@@ -53,37 +60,44 @@ export default function BusinessBestCarousel({
     };
   }, [emblaApi]);
 
+  // Don't render if no businesses
+  if (businesses.length === 0) {
+    return null;
+  }
+
   return (
     <div className="py-8 px-4 lg:px-16">
       {/* Header with Title and Navigation Buttons */}
-      <div className="flex flex-row justify-between items-center mb-5">
+      <div className="flex items-center justify-between mb-6">
         <h2 className="font-semibold text-2xl md:text-3xl">{title}</h2>
 
         {/* Navigation Buttons */}
-        <div className="hidden md:flex gap-2">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={scrollPrev}
-            disabled={!canScrollPrev}
-            className="rounded-full bg-white hover:bg-[#E2E8F0] border-[#E2E8F0] disabled:opacity-50"
-          >
-            <ChevronLeft className="w-5 h-5 text-gray-700" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={scrollNext}
-            disabled={!canScrollNext}
-            className="rounded-full bg-white hover:bg-[#E2E8F0] border-[#E2E8F0] disabled:opacity-50"
-          >
-            <ChevronRight className="w-5 h-5 text-[#275782]" />
-          </Button>
-        </div>
+        {showNavigation && (
+          <div className="hidden md:flex gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={scrollPrev}
+              disabled={!canScrollPrev}
+              className="rounded-full bg-white hover:bg-[#E2E8F0] border-[#E2E8F0] disabled:opacity-50"
+            >
+              <ChevronLeft className="w-5 h-5 text-gray-700" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={scrollNext}
+              disabled={!canScrollNext}
+              className="rounded-full bg-white hover:bg-[#E2E8F0] border-[#E2E8F0] disabled:opacity-50"
+            >
+              <ChevronRight className="w-5 h-5 text-[#275782]" />
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Carousel Container */}
-      <div className="overflow-hidden " ref={emblaRef}>
+      <div className="overflow-hidden pb-2" ref={emblaRef}>
         <div className="flex gap-4">
           {businesses.map((business) => (
             <div

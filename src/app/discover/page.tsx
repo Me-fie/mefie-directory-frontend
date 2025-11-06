@@ -133,7 +133,7 @@ export default async function Discover() {
 
         {/* Communities section */}
         <div className="py-10 px-4 lg:px-16">
-          <div className="flex flex-row justify-between items-end md:items-center gap-3 mb-8">
+          <div className="flex flex-row justify-between items-end md:items-center gap-3 mb-6">
             <div className="flex flex-col space-y-2">
               <h2 className="font-semibold text-xl md:text-4xl">Communities</h2>
             </div>
@@ -152,7 +152,6 @@ export default async function Discover() {
               </Link>
             </div>
           </div>
-
     
           <CommunitySectionCarousel communities={communityCards} />
         </div>
