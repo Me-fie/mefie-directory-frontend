@@ -165,7 +165,7 @@ export default async function NewsDetail({ params }: NewsDetailProps) {
 
       {/* Other news */}
       <div className="bg-white py-16 lg:py-20">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-center text-3xl lg:text-4xl font-semibold mb-12 lg:mb-16">
             Other news you might be interested
           </h2>
