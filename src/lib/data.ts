@@ -1086,3 +1086,190 @@ export const faqs: Faq[] = [
     answer: "Customers find your business through search, social media, and referrals.",
   }
 ];
+
+
+// About page news
+export type NewsItem = {
+  id: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  image: string;
+  category: string;
+  categoryColor?: string;
+  author: {
+    name: string;
+    avatar: string;
+  };
+  readTime: string;
+  content: string;
+};
+
+export const newsList: NewsItem[] = [
+  {
+    id: "luxury-grocer-toothpaste",
+    title: "Luxury Grocer Launches $11 Toothpaste",
+    date: "April 5, 2025",
+    excerpt:
+      "High-end wellness-oriented grocer Enewhan has released a toothpaste-inspired smoothie in collaboration with oral-care.",
+    image: "/images/about/news-1.jpg",
+    category: "Food",
+    categoryColor: "bg-green-100 text-green-700",
+    author: {
+      name: "Sarah Johnson",
+      avatar: "/images/about/testimonial.png",
+    },
+    readTime: "4 min read",
+    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce velit ex facilisis metus pellentesque oreet suscipit. Nibh mattis vitae odio, turpis eu neque. Vitae massa tempus, ornare sit amet nisi eget nisi, sed dui. Donec purus velit at oreet imperdiet. Hendrerit mollis ullamcorper quis commodo vitae.
+
+1. AI-Driven Financial Tools
+Discover how these unique algorithms help optimize your investment portfolio based on real-time market data and trends. These tools are designed to minimize risk and maximize returns through intelligent decision-making.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce velit ex facilisis metus pellentesque oreet suscipit. Nibh mattis vitae odio, turpis eu neque. Vitae massa tempus, ornare sit amet nisi eget nisi, sed dui. Donec purus velit at oreet imperdiet. Hendrerit mollis ullamcorper quis commodo vitae.
+
+2. Automated Investment Strategies
+Explore strategies where algorithms help optimize your investment portfolio based on real-time market data and trends. These strategies are designed to minimize risk and maximize returns through intelligent decision-making.
+
+3. Personalized Budgeting Solutions
+Learn how fintech apps provide personalized budgeting recommendations. These solutions aim to enhance financial literacy and empower users to achieve their financial goals through actionable insights and coaching.
+
+![/images/about/grid-2.jpg]
+
+4. Automated Savings Plans
+Investment systems that automatically transfer funds into savings accounts based on user-defined goals. This feature promotes consistent saving habits and helps users quickly build an emergency fund or save for specific purchases without needing to think about it.
+
+5. Investment Tracking Tools
+- Track and monitor development
+- Manage your investment account with comments
+- Analyze portfolio performance
+
+Offer platforms that allow users to monitor their investment portfolios in real time. These tools provide predictive performance, diversification, and risk assessment, helping users make informed decisions about their investment strategies.`,
+  },
+  {
+    id: "fancy-gadam-projects",
+    title: "Fancy Gadam Announces Two Major Projects",
+    date: "September 17, 2025",
+    excerpt:
+      "Ghanaian artiste Fancy Gadam has revealed plans for two new music projects in 2026.",
+    image: "/images/about/news-2.jpg",
+    category: "Entertainment",
+    categoryColor: "bg-blue-100 text-blue-700",
+    author: {
+      name: "Michael Owusu",
+      avatar: "/images/about/testimonial.png",
+    },
+    readTime: "3 min read",
+    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce velit ex facilisis metus pellentesque oreet suscipit. Nibh mattis vitae odio, turpis eu neque. Vitae massa tempus, ornare sit amet nisi eget nisi, sed dui.
+
+The announcement comes as Fancy Gadam continues to dominate the Ghanaian music scene with his unique blend of traditional and modern sounds. His upcoming projects promise to showcase his versatility and commitment to pushing creative boundaries.
+
+1. Album Release Plans
+The first project is a full-length album featuring collaborations with both local and international artists. This album aims to celebrate Ghanaian culture while incorporating global musical influences.
+
+2. Documentary Series
+The second project is a documentary series that will give fans an intimate look into his creative process, life journey, and the stories behind his most popular songs.
+
+Both projects are expected to launch in the first quarter of 2026, with pre-release singles dropping throughout late 2025.`,
+  },
+  {
+    id: "community-spaces",
+    title: "Elevating Our Progress With New Community Spaces",
+    date: "October 25, 2024",
+    excerpt:
+      "The development team has unveiled the next phase of our community expansion, focusing on accessibility and comfort.",
+    image: "/images/about/grid-1.jpg",
+    category: "Community",
+    categoryColor: "bg-purple-100 text-purple-700",
+    author: {
+      name: "Kwame Mensah",
+      avatar: "/images/about/testimonial.png",
+    },
+    readTime: "5 min read",
+    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce velit ex facilisis metus pellentesque oreet suscipit. Nibh mattis vitae odio, turpis eu neque.
+
+Our commitment to building inclusive community spaces continues with this exciting new development. These spaces are designed to bring people together and foster meaningful connections.
+
+1. Accessible Design
+All new spaces feature wheelchair accessibility, sensory-friendly environments, and multilingual signage to ensure everyone feels welcome.
+
+2. Modern Amenities
+From high-speed internet to comfortable seating areas, these spaces are equipped with everything needed for both work and relaxation.
+
+3. Community Programming
+Regular events, workshops, and cultural celebrations will be hosted in these new spaces to strengthen community bonds.`,
+  },
+];
+
+// Testimonials
+export type Testimonial = {
+  id: string;
+  name: string;
+  image: string;
+  message: string;
+  review: string;
+  stars: number;
+  role?: string;
+};
+
+export const testimonials: Testimonial[] = [
+  {
+    id: "1",
+    name: "Alexander Brown",
+    image: "/images/about/testimonial.png",
+    message: "Thank you for giving me the best offers for...",
+    review:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor minim aliqua. Excepturi sit occaecat culpa adipisci deserunt.",
+    stars: 5,
+    role: "Business Owner",
+  },
+  {
+    id: "2",
+    name: "Sophia Martinez",
+    image: "/images/about/testimonial.png",
+    message: "Amazing platform for discovering local businesses",
+    review:
+      "Mefie Directory has completely transformed how I find and connect with African businesses. The platform is intuitive and the listings are comprehensive.",
+    stars: 5,
+    role: "Community Member",
+  },
+  {
+    id: "3",
+    name: "Kwame Asante",
+    image: "/images/about/testimonial.png",
+    message: "Best directory for Ghanaian culture and events",
+    review:
+      "As someone in the diaspora, Mefie helps me stay connected to my roots. I've discovered amazing events and businesses through this platform.",
+    stars: 5,
+    role: "Diaspora Member",
+  },
+  {
+    id: "4",
+    name: "Amina Hassan",
+    image: "/images/about/testimonial.png",
+    message: "Excellent resource for event planning",
+    review:
+      "Planning cultural events has never been easier. Mefie Directory provides all the resources and connections I need in one place.",
+    stars: 5,
+    role: "Event Planner",
+  },
+  {
+    id: "5",
+    name: "David Osei",
+    image: "/images/about/testimonial.png",
+    message: "Great for promoting my business",
+    review:
+      "Since listing my business on Mefie, I've seen a significant increase in customer engagement. The platform truly supports African entrepreneurs.",
+    stars: 5,
+    role: "Restaurant Owner",
+  },
+  {
+    id: "6",
+    name: "Grace Mensah",
+    image: "/images/about/testimonial.png",
+    message: "Love the community focus",
+    review:
+      "Mefie isn't just a directory, it's a community. I've made meaningful connections and discovered opportunities I wouldn't have found elsewhere.",
+    stars: 5,
+    role: "Fashion Designer",
+  },
+];

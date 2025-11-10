@@ -148,7 +148,7 @@ export default function Navbar() {
 
       {/* Mobile Dropdown */}
       {isMobileMenuOpen && (
-        <div className="md:hidden fixed left-0 right-0 z-50 bg-(--background-secondary) text-white animate-fadeIn">
+        <div className="lg:hidden fixed left-0 right-0 z-50 bg-(--background-secondary) text-white animate-fadeIn">
           <div className="w-full bg-[#14202b] py-4 flex justify-center">
             <div className="flex items-center space-x-12">
               <Link

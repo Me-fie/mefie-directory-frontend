@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const navigationItems = [
   {
-    label: "All Listings",
+    label: "Discover",
     href: "/discover",
     icon: "/images/icons/tag.svg",
     activeIcon: "/images/icons/tag-active.svg",
