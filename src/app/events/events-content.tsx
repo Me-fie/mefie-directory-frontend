@@ -85,7 +85,7 @@ export default function EventsContent({
       {/* Search and Filter Bar */}
       <div>
         <Suspense fallback={<div className="h-20" />}>
-          <SearchHeader context="businesses" />
+          <SearchHeader context="events" />
         </Suspense>
       </div>
 

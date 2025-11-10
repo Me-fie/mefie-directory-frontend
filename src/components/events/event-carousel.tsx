@@ -9,7 +9,9 @@ import { EventCardScroll } from "./event-card-scroll";
 interface EventSectionCarouselProps {
   events: Event[];
   title?: string;
+  showTitle?: boolean;
   showNavigation?: boolean;
+  noPadding?: boolean;
   onViewDetails?: (eventId: string) => void;
   onGetTickets?: (eventId: string) => void;
 }
@@ -17,7 +19,9 @@ interface EventSectionCarouselProps {
 export default function EventCarousel({
   events,
   title = "Events",
+  showTitle = true,
   showNavigation = true,
+  noPadding = false,
   onViewDetails,
   onGetTickets,
 }: EventSectionCarouselProps) {
@@ -60,13 +64,14 @@ export default function EventCarousel({
   }, [emblaApi]);
 
   return (
-    <div className="py-12 px-4 lg:px-16">
+    <div className={noPadding ? "" : "py-12 px-4 lg:px-16"}>
       {/* Header with Title and Navigation Buttons */}
-      <div className="mb-8 flex items-center justify-between">
-        <h2 className="font-semibold text-2xl md:text-3xl">{title}</h2>
+      {showTitle && (
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="font-semibold text-2xl md:text-3xl">{title}</h2>
 
-        {/* Navigation Buttons */}
-        {showNavigation && (
+          {/* Navigation Buttons */}
+          {showNavigation && (
           <div className="hidden md:flex gap-2">
             <Button
               variant="outline"
@@ -88,7 +93,8 @@ export default function EventCarousel({
             </Button>
           </div>
         )}
-      </div>
+        </div>
+      )}
 
       {/* Carousel Container */}
       <div className="overflow-hidden pb-2" ref={emblaRef}>

@@ -1,98 +1,21 @@
-"use client";
-import { useCallback, useEffect, useState } from "react";
-import { ChevronRight, ChevronLeft } from "lucide-react";
-import useEmblaCarousel from "embla-carousel-react";
-import type { CommunityCard as CommunityCardType } from "@/lib/data";
-import CommunityCard from "./community-card";
-import { Button } from "./ui/button";
+// This component is a wrapper for the consolidated CommunityCarousel
+// Used in Discover and Events pages with compact layout (no padding, no title)
+import type { CommunityCard } from "@/lib/data";
+import CommunityCarousel from "./communities/community-carousel";
 
 interface CommunitySectionCarouselProps {
-  communities: CommunityCardType[];
+  communities: CommunityCard[];
 }
 
 export default function CommunitySectionCarousel({
   communities,
 }: CommunitySectionCarouselProps) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "center",
-    loop: false,
-    skipSnaps: true,
-    dragFree: true,
-  });
-
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
-
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-
-    const updateButtons = () => {
-      setCanScrollPrev(emblaApi.canScrollPrev());
-      setCanScrollNext(emblaApi.canScrollNext());
-    };
-
-    emblaApi.on("select", updateButtons);
-    emblaApi.on("reInit", updateButtons);
-
-    // Initial check
-    updateButtons();
-
-    return () => {
-      emblaApi.off("select", updateButtons);
-      emblaApi.off("reInit", updateButtons);
-    };
-  }, [emblaApi]);
-
   return (
-    <div>
-      {/* Header with Title and Navigation Buttons */}
-      <div className="hidden mb-5">
-        <h2 className="font-semibold text-2xl md:text-3xl">Events</h2>
-
-        {/* Navigation Buttons */}
-        <div className="hidden md:flex gap-2">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={scrollPrev}
-            disabled={!canScrollPrev}
-            className="rounded-full bg-white hover:bg-[#E2E8F0] border-[#E2E8F0] disabled:opacity-50"
-          >
-            <ChevronLeft className="w-5 h-5 text-gray-700" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={scrollNext}
-            disabled={!canScrollNext}
-            className="rounded-full bg-white hover:bg-[#E2E8F0] border-[#E2E8F0] disabled:opacity-50"
-          >
-            <ChevronRight className="w-5 h-5 text-[#275782]" />
-          </Button>
-        </div>
-      </div>
-
-      {/* Carousel Container */}
-      <div className="overflow-hidden pb-2" ref={emblaRef}>
-        <div className="flex gap-4">
-          {communities.map((community) => (
-            <div
-              key={community.id}
-              className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_calc(50%-0.5rem)] lg:flex-[0_0_calc(33%-0.70rem)]"
-            >
-               <CommunityCard community={community} />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    <CommunityCarousel
+      communities={communities}
+      showTitle={false}
+      showNavigation={false}
+      noPadding={true}
+    />
   );
 }

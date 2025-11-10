@@ -35,7 +35,7 @@ export default function NavigationTab() {
   const pathname = usePathname();
 
   return (
-    <nav className="w-full bg-white">
+    <nav className="block lg:hidden w-full bg-white">
       <div className="mx-auto px-6 lg:px-16">
         <div className="flex items-center gap-8 overflow-x-auto scrollbar-hide">
           {navigationItems.map((item) => {

@@ -6,10 +6,10 @@ import { EventCard, type Event } from "../event-card";
 import { Button } from "../ui/button";
 
 type EventCarouselProps = {
-  events: Event[];
+  events?: Event[];
 };
 
-export function DirectoryEventCarousel({ events }: EventCarouselProps) {
+export function DirectoryEventCarousel({ events = [] }: EventCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "center",
     loop: false,

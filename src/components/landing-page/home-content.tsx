@@ -6,12 +6,12 @@ import { BusinessCarousel } from "@/components/landing-page/business-carousel";
 import { DirectoryEventCarousel } from "@/components/landing-page/directory-event-carousel";
 import Image from "next/image";
 import Link from "next/link";
-import { categories, communities } from "@/lib/data";
+import { categories, communities, Business, Event } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import { Faqs } from "@/components/landing-page/faqs";
 // TODO: Uncomment when API is ready
 // import type { Business, Event } from "@/lib/api";
-import type { Business, Event } from "@/lib/data";
+
 
 interface HomeContentProps {
   featuredBusinesses: Business[];

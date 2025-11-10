@@ -72,7 +72,7 @@ export async function fetchListings(
   params: SearchParams = {}
 ): Promise<ApiResponse<Listing>> {
   const searchParams = new URLSearchParams();
-  
+
   if (params.q) searchParams.append("q", params.q);
   if (params.country) searchParams.append("country", params.country);
   if (params.date) searchParams.append("date", params.date);
@@ -98,7 +98,7 @@ export async function fetchBusinesses(
   params: SearchParams = {}
 ): Promise<ApiResponse<Business>> {
   const searchParams = new URLSearchParams();
-  
+
   if (params.q) searchParams.append("q", params.q);
   if (params.country) searchParams.append("country", params.country);
   if (params.price) searchParams.append("price", params.price);
@@ -123,7 +123,7 @@ export async function fetchEvents(
   params: SearchParams = {}
 ): Promise<ApiResponse<Event>> {
   const searchParams = new URLSearchParams();
-  
+
   if (params.q) searchParams.append("q", params.q);
   if (params.country) searchParams.append("country", params.country);
   if (params.date) searchParams.append("date", params.date);
@@ -148,7 +148,7 @@ export async function fetchCommunities(
   params: SearchParams = {}
 ): Promise<ApiResponse<Community>> {
   const searchParams = new URLSearchParams();
-  
+
   if (params.q) searchParams.append("q", params.q);
   if (params.country) searchParams.append("country", params.country);
   if (params.page) searchParams.append("page", params.page.toString());

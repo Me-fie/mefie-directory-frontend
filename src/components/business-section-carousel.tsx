@@ -1,3 +1,5 @@
+// This component uses BusinessCard for Discover/Events pages with compact layout
+// No padding wrapper - parent controls spacing
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
@@ -53,12 +55,12 @@ export default function BusinessSectionCarousel({
 
   return (
     <div>
-      {/* Header with Title and Navigation Buttons */}
-      <div className="hidden mb-5">
+      {/* Header with hidden navigation buttons */}
+      <div className="hidden mb-8 items-center justify-between">
         <h2 className="font-semibold text-2xl md:text-3xl">Businesses</h2>
 
-        {/* Navigation Buttons */}
-        <div className="hidden md:flex gap-2">
+        {/* Navigation Buttons - Hidden */}
+        <div className="flex gap-2">
           <Button
             variant="outline"
             size="icon"
