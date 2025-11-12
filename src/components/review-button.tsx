@@ -45,7 +45,7 @@ export function ReviewsSection({ reviews }: { reviews: Review[] }) {
             <DialogHeader className="text-left">
               <DialogTitle>Leave a review</DialogTitle>
               <DialogDescription>
-                Share your experience to help others make informed decisions.
+                Share your experience to help others make informed decisions
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import useEmblaCarousel from "embla-carousel-react";
 import {useMemo, useEffect, useState} from "react";
@@ -26,6 +26,10 @@ export function HeroCarousel({
     const onSelect = () => setSelected(emblaApi.selectedScrollSnap());
     emblaApi.on("select", onSelect);
     onSelect();
+    
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
   }, [emblaApi]);
 
   return (
@@ -56,8 +60,8 @@ export function HeroCarousel({
             className={`h-2 w-2 rounded-full ${
               i === selected ? "bg-white h-2 w-4" : "bg-white/50"
             }`}
-          />)
-        )}
+          />
+        ))}
       </div>
     </div>
   );
