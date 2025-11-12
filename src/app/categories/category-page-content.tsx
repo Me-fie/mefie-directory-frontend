@@ -493,6 +493,7 @@ export default function CategoryPageContent() {
       </section>
 
       {/* Today's Best Deals Section */}
+      {popularForSelection.length > 0 && (
       <section className="py-12 px-4 lg:px-16 bg-white">
         <div className="mb-8">
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
@@ -588,6 +589,7 @@ export default function CategoryPageContent() {
           </div>
         </div>
       </section>
+)}
     </div>
   );
 }
