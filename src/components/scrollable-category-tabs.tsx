@@ -83,7 +83,7 @@ export default function ScrollableCategoryTabs({
                 aria-selected={selected}
                 onClick={() => select(cat.value)}
                 className={cn(
-                  "rounded-full px-4 py-2 text-sm md:text-base font-medium border transition-colors",
+                  "rounded-full px-4 py-2 text-sm font-medium border transition-colors",
                   tabClassName,
                   selected
                     ? cn("bg-[#9ACC23] text-white border-[#9ACC23]", activeTabClassName)

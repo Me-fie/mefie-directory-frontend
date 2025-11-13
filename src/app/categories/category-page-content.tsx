@@ -246,6 +246,9 @@ export default function CategoryPageContent() {
     <div className="min-h-screen pt-20 mx-auto">
       {/* Scrollable Category Tabs */}
       <div>
+        <Suspense fallback={<div className="h-20" />}>
+          <SearchHeader context="discover" />
+        </Suspense>
         <ScrollableCategoryTabs
           key={activeMainCategory}
           categories={subcategoryTabs}
@@ -253,9 +256,6 @@ export default function CategoryPageContent() {
           onChange={handleSubcategoryChange}
           containerClassName="pt-4 pb-1"
         />
-        <Suspense fallback={<div className="h-20" />}>
-          <SearchHeader context="discover" />
-        </Suspense>
       </div>
 
       {/* Most Popular Attire Stylists Section */}
