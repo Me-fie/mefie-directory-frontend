@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/auth-context";
 
 export default function Login() {
   const router = useRouter();
@@ -20,6 +21,8 @@ export default function Login() {
     email: "",
     password: "",
   });
+
+  const { login } = useAuth();
 
   // validation
   const validateForm = () => {
@@ -78,8 +81,8 @@ export default function Login() {
         throw new Error(data.message || "Failed to login");
       }
       // store auth token for navbar
-      if (data.token) {
-        localStorage.setItem("authToken", data.token);
+      if (response.ok) {
+        login(data.token); // This will update the global state and Navbar will re-render
       }
 
       // // handle successful login
