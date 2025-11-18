@@ -70,7 +70,7 @@ export default function Header() {
                 <div className="flex flex-row items-center justify-between px-1.5 py-2">
                   <DropdownMenuLabel>Notification</DropdownMenuLabel>
                   <div className="text-sm pr-3 cursor-pointer">
-                    <button className="text-[#93C01F]">Mark all as read</button>
+                    <Button variant="link" className="text-[#93C01F] cursor-pointer hover:no-underline">Mark all as read</Button>
                   </div>
                 </div>
                 <div className="max-h-60 overflow-y-auto px-2">

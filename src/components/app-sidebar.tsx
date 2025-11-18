@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Sidebar,
   SidebarContent,
@@ -7,42 +9,48 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-//   SidebarSeparator,
+  //   SidebarSeparator,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
-import { Home, Tag, BarChart3, Settings, MessageCircle } from "lucide-react";
-import Image from "next/image"
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 // Menu items
 const items = [
   {
     title: "Home",
-    url: "/dashboard/",
-    Icon: Home,
+    url: "/dashboard",
+    iconUrl: "/images/icons/home.svg",
   },
   {
     title: "My Listing",
     url: "/dashboard/my-listing",
-    Icon: Tag,
+    iconUrl: "/images/icons/listings.svg",
   },
   {
     title: "Inquiries",
     url: "/dashboard/inquiries",
-    Icon: MessageCircle,
+    iconUrl: "/images/icons/chat.svg",
   },
   {
     title: "Analytics",
     url: "/dashboard/analytics",
-    Icon: BarChart3,
+    iconUrl: "/images/icons/curves.svg",
   },
   {
     title: "Settings",
     url: "/dashboard/settings",
-    Icon: Settings,
+    iconUrl: "/images/icons/setting.svg",
   },
 ];
 
 export function AppSidebar() {
+  const pathname = usePathname();
+  // Active state
+  const isActive = (path: string) => {
+    return pathname === path;
+  };
+
   return (
     <Sidebar variant="inset" className="bg-[#1C3C59] text-white">
       <SidebarHeader className="bg-[#1C3C59]">
@@ -65,15 +73,17 @@ export function AppSidebar() {
       <SidebarContent className="bg-[#1C3C59]">
         <SidebarGroup className="bg-[#1C3C59]">
           <SidebarGroupContent className="bg-[#1C3C59]">
-            <SidebarMenu className="pt-10 space-y-5">
+            <SidebarMenu className="pt-10 space-y-2">
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <Link
                       href={item.url}
-                      className="flex items-center gap-2 p-2 rounded-md hover:bg-[#93C01F] text-white transition-colors"
+                      className={`flex items-center gap-2 px-2 py-5 rounded-lg hover:bg-white/10 text-white transition-colors ${
+                        isActive(item.url) ? "bg-[#93C01F]" : ""
+                      }`}
                     >
-                      <item.Icon className="w-5 h-5 text-white" />
+                      <Image src={item.iconUrl} alt={item.title} width={20} height={20} />
                       <span className="text-sm font-medium text-white">
                         {item.title}
                       </span>
