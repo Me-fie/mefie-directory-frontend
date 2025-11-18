@@ -99,9 +99,7 @@ export default function RootLayout({
       <body className={`${gilroy.variable} antialiased`}>
         {/* <Navbar /> */}
         <AuthProvider>
-          <LayoutWrapper>
-            <div className="font-gilroy">{children}</div>
-          </LayoutWrapper>
+          <LayoutWrapper>{children}</LayoutWrapper>
         </AuthProvider>
         {/* <Footer /> */}
       </body>

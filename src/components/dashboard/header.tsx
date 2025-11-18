@@ -1,91 +1,199 @@
 "use client";
 
-import { useState } from "react";
-import { Bell, LogOut, UserRoundPen, UserRoundPlus } from "lucide-react";
+// import { useState } from "react";
+import {
+  Bell,
+  // ChevronDown,
+  // LogOut,
+  // UserRoundPlus,
+} from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import { Badge } from "../ui/badge";
+import { Separator } from "../ui/separator";
+import Image from "next/image";
+import { useAuth } from "@/context/auth-context";
+import { Button } from "../ui/button";
 
 export default function Header() {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const isPremium = false; // This would typically come from user data
+  const { user, logout } = useAuth();
 
   return (
-    <div className="flex items-center justify-end px-10 py-4">
-      <div className="flex items-center gap-4">
+    <div className="flex items-center justify-end px-10 py-1">
+      {user && (
+        <div className="flex items-center gap-4">
+          <div>
+            {isPremium ? (
+              <Badge className="bg-[#FACC15] text-white px-2 py-2 shadow-sm">
+                <span>
+                  <Image
+                    src="/images/icons/diamond.svg"
+                    alt="diamond"
+                    width={16}
+                    height={16}
+                  />
+                </span>
+                Premium
+              </Badge>
+            ) : (
+              <Badge className="bg-[#419E6A] text-white px-2 py-2 shadow-sm">
+                <span>
+                  <Image
+                    src="/images/icons/bulb.svg"
+                    alt="diamond"
+                    width={16}
+                    height={16}
+                  />
+                </span>
+                Basic
+              </Badge>
+            )}
+          </div>
+          <div className="flex items-center rounded-full bg-[#E9F0F6] p-2 cursor-pointer">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Bell className="h-5 w-5 text-gray-900" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="rounded-lg mt-2 w-80 space-y-4 p-0"
+                align="end"
+              >
+                <div className="flex flex-row items-center justify-between px-1.5 py-2">
+                  <DropdownMenuLabel>Notification</DropdownMenuLabel>
+                  <div className="text-sm pr-3 cursor-pointer">
+                    <button className="text-[#93C01F]">Mark all as read</button>
+                  </div>
+                </div>
+                <div className="max-h-60 overflow-y-auto px-2">
+                <DropdownMenuItem>No new notifications</DropdownMenuItem>
+                </div>
+                <Separator className="mt-2 mb-0" />
+                <div className="bg-[#F8FAFC] text-center w-full py-1">
+                  <Button variant="link" className="cursor-pointer ">
+                    View all notifications
+                  </Button>
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
 
-        <div className="flex items-center">
-          <Bell className="h-6 w-6 text-gray-600" />
-        </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className="flex items-center gap-3 cursor-pointer">
+                <Avatar className="w-10 h-10">
+                  <AvatarImage src={user.image} />
+                  <AvatarFallback>{user.name?.charAt(0) || "U"}</AvatarFallback>
+                </Avatar>
 
-        <div className="h-6 w-px bg-gray-300"></div>
-
-        <DropdownMenu onOpenChange={(open) => setIsDropdownOpen(open)}>
-          <DropdownMenuTrigger asChild>
-            <div className="flex items-center gap-2 cursor-pointer">
-              <Avatar>
-                <AvatarImage
-                  src="/avatar.png"
-                  alt="user"
-                  className="border border-[#F3C5D5] rounded-full bg-[#F3C5D5]"
-                />
-                <AvatarFallback>SS</AvatarFallback>
-              </Avatar>
-
-              <span className="text-sm font-medium text-gray-700">
-                Sharon Sings
-              </span>
-              <span
-                className={`text-gray-700 transition-transform ${
+                <div className="flex flex-col items-start">
+                  <span className="text-xs font-semibold text-gray-900">
+                    {user.name}
+                  </span>
+                  <Badge className="text-[10px] bg-[#FF8D2826] text-[#FF8D28] px-2 py-0 mt-1">
+                    {user.role}
+                  </Badge>
+                </div>
+                {/* <span
+                className={`text-gray-900 transition-transform ${
                   isDropdownOpen ? "rotate-180" : ""
                 }`}
               >
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 15 15"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="ml-1 h-4 w-4"
-                >
-                  <path
-                    d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
-                    fill="currentColor"
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
-            </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="rounded-lg">
-            <div className="border border-gray-200 rounded-lg">
-              <DropdownMenuItem asChild>
-                <Link href="/profile-settings" className="flex items-center gap-2">
-                  <UserRoundPen />
-                  Profile settings
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/new-account" className="flex items-center gap-2">
-                  <UserRoundPlus />
-                  New account
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/logout" className="flex items-center gap-2">
-                  <LogOut />
-                  Logout
-                </Link>
-              </DropdownMenuItem>
-            </div>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+                <ChevronDown className="h-4 w-4" />
+              </span> */}
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              className="rounded-lg mt-2 w-60 space-y-4"
+              align="end"
+            >
+              <div className=" rounded-lg">
+                <DropdownMenuItem asChild>
+                  <div className="flex items-center gap-3 cursor-pointer">
+                    <Avatar className="w-10 h-10">
+                      <AvatarImage src={user.image} />
+                      <AvatarFallback>
+                        {user.name?.charAt(0) || "U"}
+                      </AvatarFallback>
+                    </Avatar>
+
+                    <div className="flex flex-col items-start">
+                      <span className="text-sm font-semibold text-gray-900">
+                        {user.name}
+                      </span>
+                      <Badge className="text-[10px] bg-[#FF8D2826] text-[#FF8D28] px-2 py-0 mt-1">
+                        {user.role}
+                      </Badge>
+                    </div>
+                  </div>
+                </DropdownMenuItem>
+                <Separator className="my-2" />
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/profile-settings"
+                    className="flex items-center gap-2"
+                  >
+                    <Image
+                      src="/images/icons/profile.svg"
+                      alt=""
+                      width={16}
+                      height={16}
+                    />
+                    Profile Settings
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/billing" className="flex items-center gap-2">
+                    <Image
+                      src="/images/icons/billing.svg"
+                      alt="Billing"
+                      width={16}
+                      height={16}
+                    />
+                    Billing & Subscriptions
+                  </Link>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem asChild>
+                  <Link href="/billing" className="flex items-center gap-2">
+                    <Image
+                      src="/images/icons/help.svg"
+                      alt="Help"
+                      width={16}
+                      height={16}
+                    />
+                    Help/Support
+                  </Link>
+                </DropdownMenuItem>
+                <Separator className="my-2" />
+                <DropdownMenuItem asChild>
+                  <Button
+                    variant="link"
+                    onClick={logout}
+                    className="flex items-center gap-2 text-red-500 hover:bg-transparent hover:no-underline hover:text-red-500 transition-colors cursor-pointer"
+                  >
+                    <Image
+                      src="/images/icons/logout.svg"
+                      alt="Logout"
+                      width={16}
+                      height={16}
+                    />
+                    Logout
+                  </Button>
+                </DropdownMenuItem>
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      )}
     </div>
   );
 }

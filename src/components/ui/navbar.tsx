@@ -9,10 +9,13 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
+  // DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { useAuth } from '@/context/auth-context';
+import { useAuth } from "@/context/auth-context";
+import { Separator } from "./separator";
+import { Badge } from "./badge";
+import { Button } from "./button";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -24,9 +27,9 @@ export default function Navbar() {
   };
 
   // Debug: Check auth state
-  useEffect(() => {
-    console.log('Navbar Auth State:', { user, loading });
-  }, [user, loading]);
+  // useEffect(() => {
+  //   // console.log("Navbar Auth State:", { user, loading });
+  // }, [user, loading]);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -130,9 +133,9 @@ export default function Navbar() {
           <div className="hidden lg:flex lg:items-center lg:space-x-3">
             {user ? (
               // LOGGED IN STATE - Show user profile and bell icon
-              <div className="flex items-center gap-6">
-                <button className="relative p-3 rounded-full bg-white/10 hover:bg-white/20 transition">
-                  <Bell className="w-5 h-5 text-white" />
+              <div className="flex items-center gap-4">
+                <button className="relative p-3 rounded-full bg-white transition">
+                  <Bell className="w-5 h-5 text-black" />
                 </button>
 
                 <DropdownMenu>
@@ -141,12 +144,12 @@ export default function Navbar() {
                       <Avatar className="w-10 h-10">
                         <AvatarImage src={user.image} />
                         <AvatarFallback>
-                          {user.name?.charAt(0) || 'U'}
+                          {user.name?.charAt(0) || "U"}
                         </AvatarFallback>
                       </Avatar>
                       <div className="text-left">
                         <p className="text-sm font-medium">{user.name}</p>
-                        <span className="text-xs px-2 py-0.5 bg-white/20 rounded-full">
+                        <span className="text-xs px-2 py-0.5 bg-[#FF8D2826] text-[#FF8D28] rounded-full">
                           {user.role}
                         </span>
                       </div>
@@ -154,31 +157,90 @@ export default function Navbar() {
                   </DropdownMenuTrigger>
 
                   <DropdownMenuContent
+                    className="rounded-lg mt-2 w-60 space-y-4"
                     align="end"
-                    className="w-60 bg-white text-gray-800 p-4 rounded-xl shadow-xl"
                   >
-                    <DropdownMenuItem asChild>
-                      <Link href="/dashboard" className="flex gap-2 py-2 cursor-pointer">
-                        Dashboard
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link href="/bookmarks" className="flex gap-2 py-2 cursor-pointer">
-                        Bookmarks
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link href="/help" className="flex gap-2 py-2 cursor-pointer">
-                        Help / Support
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      onClick={logout}
-                      className="text-red-600 py-2 cursor-pointer"
-                    >
-                      Logout
-                    </DropdownMenuItem>
+                    <div className=" rounded-lg">
+                      <DropdownMenuItem asChild>
+                        <div className="flex items-center gap-3 cursor-pointer">
+                          <Avatar className="w-10 h-10">
+                            <AvatarImage src={user.image} />
+                            <AvatarFallback>
+                              {user.name?.charAt(0) || "U"}
+                            </AvatarFallback>
+                          </Avatar>
+
+                          <div className="flex flex-col items-start">
+                            <span className="text-sm font-semibold text-gray-900">
+                              {user.name}
+                            </span>
+                            <Badge className="text-[10px] bg-[#FF8D2826] text-[#FF8D28] px-2 py-0 mt-1">
+                              {user.role}
+                            </Badge>
+                          </div>
+                        </div>
+                      </DropdownMenuItem>
+                      <Separator className="my-2" />
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href="/dashboard"
+                          className="flex items-center gap-2"
+                        >
+                          <Image
+                            src="/images/icons/profile.svg"
+                            alt=""
+                            width={16}
+                            height={16}
+                          />
+                          Dashboard
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href="/billing"
+                          className="flex items-center gap-2"
+                        >
+                          <Image
+                            src="/images/icons/billing.svg"
+                            alt="Billing"
+                            width={16}
+                            height={16}
+                          />
+                          Billing & Subscriptions
+                        </Link>
+                      </DropdownMenuItem>
+
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href="/billing"
+                          className="flex items-center gap-2"
+                        >
+                          <Image
+                            src="/images/icons/help.svg"
+                            alt="Help"
+                            width={16}
+                            height={16}
+                          />
+                          Help/Support
+                        </Link>
+                      </DropdownMenuItem>
+                      <Separator className="my-2" />
+                      <DropdownMenuItem asChild>
+                        <Button
+                          variant="link"
+                          onClick={logout}
+                          className="flex items-center gap-2 text-red-500 hover:bg-transparent hover:no-underline hover:text-red-500 transition-colors cursor-pointer"
+                        >
+                          <Image
+                            src="/images/icons/logout.svg"
+                            alt="Logout"
+                            width={16}
+                            height={16}
+                          />
+                          Logout
+                        </Button>
+                      </DropdownMenuItem>
+                    </div>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
@@ -235,7 +297,7 @@ export default function Navbar() {
                   <Avatar className="w-12 h-12">
                     <AvatarImage src={user.image} />
                     <AvatarFallback>
-                      {user.name?.charAt(0) || 'U'}
+                      {user.name?.charAt(0) || "U"}
                     </AvatarFallback>
                   </Avatar>
                   <div>
@@ -245,22 +307,22 @@ export default function Navbar() {
                     </span>
                   </div>
                 </div>
-                <Link 
-                  href="/dashboard" 
+                <Link
+                  href="/dashboard"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block py-2"
                 >
                   Dashboard
                 </Link>
-                <Link 
-                  href="/bookmarks" 
+                <Link
+                  href="/bookmarks"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block py-2"
                 >
                   Bookmarks
                 </Link>
-                <Link 
-                  href="/help" 
+                <Link
+                  href="/help"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block py-2"
                 >
@@ -279,13 +341,13 @@ export default function Navbar() {
             ) : (
               // MOBILE LOGGED OUT STATE
               <div className="flex flex-row items-center justify-center space-x-12 bg-[#14202b] py-5">
-                <Link 
+                <Link
                   href="/auth/login"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Login
                 </Link>
-                <Link 
+                <Link
                   href="/auth/signup"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >

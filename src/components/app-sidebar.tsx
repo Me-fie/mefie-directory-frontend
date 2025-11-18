@@ -71,7 +71,7 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                     <Link
                       href={item.url}
-                      className="flex items-center gap-2 p-2 rounded-md hover:bg-white/10 text-white transition-colors"
+                      className="flex items-center gap-2 p-2 rounded-md hover:bg-[#93C01F] text-white transition-colors"
                     >
                       <item.Icon className="w-5 h-5 text-white" />
                       <span className="text-sm font-medium text-white">

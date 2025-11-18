@@ -24,12 +24,10 @@ export default function Login() {
 
   const { login } = useAuth();
 
-  // validation
   const validateForm = () => {
     const newErrors = { email: "", password: "" };
     let isValid = true;
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
@@ -39,7 +37,6 @@ export default function Login() {
       isValid = false;
     }
 
-    // Password validation
     if (!formData.password) {
       newErrors.password = "Password is required";
       isValid = false;
@@ -67,8 +64,9 @@ export default function Login() {
     }
 
     try {
-      const API_URL = process.env.API_URL || "https://me-fie.co.uk";
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://me-fie.co.uk";
 
+      // console.log('📡 Sending login request to:', `${API_URL}/api/login`);
       const response = await fetch(`${API_URL}/api/login`, {
         method: "POST",
         headers: {
@@ -76,22 +74,42 @@ export default function Login() {
         },
         body: JSON.stringify(formData),
       });
+
       const data = await response.json();
+      // console.log('📨 Raw login response:', data);
+
       if (!response.ok) {
         throw new Error(data.message || "Failed to login");
       }
-      // store auth token for navbar
-      if (response.ok) {
-        login(data.token); // This will update the global state and Navbar will re-render
+
+      // Debug: Check all possible token locations
+      // console.log('🔍 Searching for token in response:', {
+      //   'data.token': data.token,
+      //   'data.access_token': data.access_token,
+      //   'data.jwt': data.jwt,
+      //   'data.data': data.data,
+      //   'data.data?.token': data.data?.token,
+      //   'fullResponse': data
+      // });
+
+      // Try multiple possible token field names
+      const token =
+        data.token || data.access_token || data.jwt || data.data?.token;
+
+      if (token) {
+        // console.log('✅ Token found:', token);
+        await login(token);
+        router.push("/");
+      } else {
+        // console.error('❌ No token found in response');
+        setError("Login successful but no token received");
       }
-
-      // // handle successful login
-      // console.log("login successful:", data);
-
-      router.push("/");
     } catch (error) {
-      console.error("login failed:", error);
-      setError("Failed to login");
+      // console.error("❌ Login failed:", error);
+      setError(
+        "Failed to login: " +
+          (error instanceof Error ? error.message : String(error))
+      );
     } finally {
       setIsLoading(false);
     }
@@ -193,39 +211,6 @@ export default function Login() {
               >
                 {isLoading ? "Signing in..." : "Sign in"}
               </Button>
-
-              {/* <div className="flex items-center justify-center gap-2 text-xs text-gray-400 my-4">
-                <span className="flex-1 border-t" />
-                OR
-                <span className="flex-1 border-t" />
-              </div> */}
-
-              {/* alternative logins */}
-              {/* <div className="flex flex-col gap-2 mt-2">
-                <Button className="w-full text-sm bg-transparent text-gray-900 border border-gray-200 hover:bg-[#93C01F] hover:text-white cursor-pointer">
-                  {" "}
-                  Continue with Google{" "}
-                  <span>
-                    <Image
-                      src="/images/icons/google.svg"
-                      alt="Google"
-                      width={20}
-                      height={20}
-                    />
-                  </span>
-                </Button>
-                <Button className="w-full text-sm bg-transparent text-gray-900 border border-gray-200 hover:bg-[#93C01F] hover:text-white cursor-pointer">
-                  Continue with Facebook
-                  <span>
-                    <Image
-                      src="/images/icons/facebook-2.svg"
-                      alt="Facebook"
-                      width={20}
-                      height={20}
-                    />
-                  </span>
-                </Button>
-              </div> */}
             </div>
           </form>
         </CardContent>
