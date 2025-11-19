@@ -172,7 +172,7 @@ export default function Signup() {
         <CardContent>
           <form onSubmit={handleSubmit}>
             <div className="space-y-4">
-              <div className="space-y-2 grid grid-cols-2 space-x-4">
+              <div className="space-y-2 grid grid-cols-1 md:grid-cols-2 space-x-4">
                 <div>
                   <Label htmlFor="first_name" className="text-sm">
                     First Name <span className="text-red-500">*</span>
@@ -181,7 +181,7 @@ export default function Signup() {
                     id="first_name"
                     type="text"
                     placeholder="Enter your First Name"
-                    className="w-full"
+                    className="w-full placeholder:text-xs"
                     value={formData.first_name}
                     onChange={handleInputChange}
                     required
@@ -198,7 +198,7 @@ export default function Signup() {
                     id="last_name"
                     type="text"
                     placeholder="Enter your Last Name"
-                    className="w-full"
+                    className="w-full  placeholder:text-xs"
                     value={formData.last_name}
                     onChange={handleInputChange}
                     required
@@ -217,7 +217,7 @@ export default function Signup() {
                     id="phone"
                     type="number"
                     placeholder="Enter your Phone Number"
-                    className="w-full"
+                    className="w-full  placeholder:text-xs"
                     value={formData.phone}
                     onChange={handleInputChange}
                     required
@@ -233,7 +233,7 @@ export default function Signup() {
                   id="email"
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full"
+                  className="w-full  placeholder:text-xs"
                   value={formData.email}
                   onChange={handleInputChange}
                   required
@@ -250,7 +250,7 @@ export default function Signup() {
                   id="password"
                   type="password"
                   placeholder="Enter your password"
-                  className="w-full"
+                  className="w-full placeholder:text-xs"
                   value={formData.password}
                   onChange={handleInputChange}
                   required

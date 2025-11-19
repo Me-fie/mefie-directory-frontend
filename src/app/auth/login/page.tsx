@@ -168,7 +168,7 @@ export default function Login() {
                   id="email"
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full"
+                  className="w-full placeholder:text-xs"
                   value={formData.email}
                   onChange={handleInputChange}
                   required
@@ -193,7 +193,7 @@ export default function Login() {
                   id="password"
                   type="password"
                   placeholder="Enter your password"
-                  className="w-full"
+                  className="w-full  placeholder:text-xs"
                   value={formData.password}
                   onChange={handleInputChange}
                   required
