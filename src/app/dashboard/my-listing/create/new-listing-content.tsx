@@ -319,7 +319,7 @@ export default function ListingContent() {
       <div className="border-b border-gray-100" />
 
       {/* Buttons */}
-      <div className="flex justify-between lg:mt-8 md:px-4">
+      <div className="flex justify-between mt-4 md:px-4">
         <div>
           {currentStep > 1 && (
             <Button
