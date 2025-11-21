@@ -15,7 +15,7 @@ export function SidebarChoiceCard({ id, label, description, isSelected, onClick 
       className={cn(
         "w-full text-left p-4 rounded-lg border-2 transition-all hover:border-primary/50",
         isSelected 
-          ? "bg-success/10 border-success" 
+          ? "bg-success/10 border-[#93C01F]" 
           : "bg-card border-border"
       )}
     >
@@ -24,7 +24,7 @@ export function SidebarChoiceCard({ id, label, description, isSelected, onClick 
           className={cn(
             "flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold shrink-0",
             isSelected 
-              ? "bg-success text-success-foreground" 
+              ? "bg-[#EBF8C9] text-success-foreground" 
               : "bg-muted text-muted-foreground"
           )}
         >
@@ -32,7 +32,7 @@ export function SidebarChoiceCard({ id, label, description, isSelected, onClick 
         </div>
         <div className="flex-1">
           <h3 className={cn("font-semibold mb-1", isSelected && "text-success")}>{label}</h3>
-          <p className="text-sm text-muted-foreground">{description}</p>
+          <p className="text-sm text-gray-800">{description}</p>
         </div>
       </div>
     </button>

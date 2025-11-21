@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useContext, useState, ReactNode } from "react";
 
 export type ListingType = "business" | "event";
@@ -9,11 +11,18 @@ interface BasicInfo {
   description: string;
 }
 
+export interface DaySchedule {
+  day: string;
+  enabled: boolean;
+  startTime: string;
+  endTime: string;
+}
+
 interface BusinessDetails {
   address: string;
   location: string;
   email: string;
-  businessHours: string;
+  businessHours: DaySchedule[];
   tags: string[];
 }
 
@@ -51,7 +60,15 @@ export function ListingProvider({ children }: { children: ReactNode }) {
     address: "",
     location: "",
     email: "",
-    businessHours: "",
+    businessHours: [
+      { day: "Monday", enabled: false, startTime: "", endTime: "" },
+      { day: "Tuesday", enabled: false, startTime: "", endTime: "" },
+      { day: "Wednesday", enabled: false, startTime: "", endTime: "" },
+      { day: "Thursday", enabled: false, startTime: "", endTime: "" },
+      { day: "Friday", enabled: false, startTime: "", endTime: "" },
+      { day: "Saturday", enabled: false, startTime: "", endTime: "" },
+      { day: "Sunday", enabled: false, startTime: "", endTime: "" },
+    ],
     tags: [],
   });
   const [media, setMedia] = useState<Media>({
@@ -62,7 +79,21 @@ export function ListingProvider({ children }: { children: ReactNode }) {
   const resetListing = () => {
     setCurrentStep(1);
     setBasicInfo({ name: "", category: "", subcategory: "", description: "" });
-    setBusinessDetails({ address: "", location: "", email: "", businessHours: "", tags: [] });
+    setBusinessDetails({
+      address: "",
+      location: "",
+      email: "",
+      businessHours: [
+        { day: "Monday", enabled: false, startTime: "", endTime: "" },
+        { day: "Tuesday", enabled: false, startTime: "", endTime: "" },
+        { day: "Wednesday", enabled: false, startTime: "", endTime: "" },
+        { day: "Thursday", enabled: false, startTime: "", endTime: "" },
+        { day: "Friday", enabled: false, startTime: "", endTime: "" },
+        { day: "Saturday", enabled: false, startTime: "", endTime: "" },
+        { day: "Sunday", enabled: false, startTime: "", endTime: "" },
+      ],
+      tags: [],
+    });
     setMedia({ images: [], coverPhoto: null });
   };
 

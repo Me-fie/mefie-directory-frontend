@@ -1,8 +1,10 @@
-import { StepHeader } from "@/components/dashboard/listing/step-header";
+import { ListingProvider } from "@/context/listing-form-context";
+import  ListingContent  from "./new-listing-content";
 
-export default function ListingContent() {
-
+export default function NewListing() {
   return (
-    <StepHeader currentStep={1} totalSteps={4} title="Create Listing" subtitle="Step 1: Basic Information" />
+    <ListingProvider>
+      <ListingContent />
+    </ListingProvider>
   );
 }
